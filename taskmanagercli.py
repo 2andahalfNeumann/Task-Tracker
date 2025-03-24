@@ -1,6 +1,7 @@
 import json
 from datetime import datetime
 import os
+import colourOutput as co
 
 #Add a task function
 def task_add():
@@ -65,14 +66,111 @@ def task_update():
 
 #Delete function
 def task_delete():
-    # Load Tasks
-    with open("tasks.json", "r") as f:
-        tasks = json.load(f)
+    """
+    Added error handling
+    """
+    
+    try:
+        # Load Tasks
+        with open("tasks.json", "r") as f:
+            tasks = json.load(f)
 
-        delete_id = int(input("Enter task ID to delete: "))
+        print("-" * 30 + "\n")
+        print("\nAvailable Tasks:\n")
+        for task in tasks:
+            status_color = co.ORANGE if task['task_status'] == "in-progress" else co.GREEN
+            print(f"ID: {task['task_id']} | Task: {task['task_desc']} | Status: {status_color}{task['task_status']}{co.RESET} | Date created: {task['task_createdAt']} | Date Updated: {task['task_updatedAt']}")
+            print("-" * 30 + "\n")
+        
+        # User input
+        while True:
+            try:
+                delete_id = int(input("\nEnter task ID to delete: "))
+                break
+            except ValueError:
+                print("Provided number is not valid \nPlease try again...")
+
+        #Filtering tasks
         new_tasks = [task for task in tasks if task["task_id"] != delete_id]
 
         with open("tasks.json", "w") as f:
             json.dump(new_tasks, f, indent=4)
+        
+        print(f"Successfully deleted task  {task['task_id']}")
+    
+        """
+        Currently added "errno" I stumbled across whilst testing.
+        """
+    except FileNotFoundError:
+        print("No tasks file found!")
+    except json.JSONDecodeError:
+        print("Invalid JSON format in tasks file!")
+    except Exception as e:
+        print(f"An error occured: {e}")
 
-task_update()
+def task_list():
+    try:
+    # Load Tasks
+        with open("tasks.json", "r") as f:
+            tasks = json.load(f)
+
+        print("-" * 30 + "\n")
+        print("\nAvailable Tasks:\n")
+        for task in tasks:
+            status_color = co.ORANGE if task['task_status'] == "in-progress" else co.GREEN
+            print(f"ID: {task['task_id']} | Task: {task['task_desc']} | Status: {status_color}{task['task_status']}{co.RESET} | Date created: {task['task_createdAt']} | Date Updated: {task['task_updatedAt']}")
+            print("-" * 30 + "\n")
+
+    except FileNotFoundError:
+        print("No tasks file found!")
+    except json.JSONDecodeError:
+        print("Invalid JSON format in tasks file!")
+    except Exception as e:
+        print(f"An error occured: {e}")
+
+def task_update():
+    try:
+    # Load Tasks
+        with open("tasks.json", "r") as f:
+            tasks = json.load(f)
+        
+        print("-" * 30 + "\n")
+        print("\nAvailable Tasks:\n")
+        for task in tasks:
+            status_color = co.ORANGE if task['task_status'] == "in-progress" else co.GREEN
+            print(f"ID: {task['task_id']} | Task: {task['task_desc']} | Status: {status_color}{task['task_status']}{co.RESET} | Date created: {task['task_createdAt']} | Date Updated: {task['task_updatedAt']}")
+            print("-" * 30 + "\n")
+
+        while True:
+            try:
+                task_id_update = int(input("\nEnter task ID to update: "))
+                task_to_update = next((task for task in tasks if task['task_id'] == task_id_update), None)
+
+                if task_to_update is None:
+                    print("Task not found!")
+                    continue
+
+                while True:
+                    new_status = input("Enter new status ('in-progress' or 'done'): ")
+                    if new_status in ['in-progress', 'done']:
+                        break
+                    print("Invalid status! Please enter 'in-progress' or 'done'")
+
+                # Update task status
+                task_to_update['task_status'] = new_status
+
+                with open("tasks.json", "w") as f:
+                    json.dump(tasks, f, indent=4)
+
+                print(f"\nTask {task_id_update} has been updated")
+                break
+
+            except ValueError as e:
+                print(f"Invalid input: {e}\n")
+
+    except FileNotFoundError:
+        print("No tasks file found!")
+    except json.JSONDecodeError:
+        print("Invalid JSON format in tasks file!")
+    except Exception as e:
+        print(f"An error occured: {e}")
