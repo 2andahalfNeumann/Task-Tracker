@@ -1,16 +1,2 @@
 [
-    {
-        "task_id": 1,
-        "task_desc": "My new task",
-        "task_status": "in-progress",
-        "task_createdAt": "2025-03-25 12:36:42",
-        "task_updatedAt": "2025-03-25 12:37:26"
-    },
-    {
-        "task_id": 2,
-        "task_desc": "exit",
-        "task_status": "in-progress",
-        "task_createdAt": "2025-03-25 12:38:52",
-        "task_updatedAt": "2025-03-25 12:38:52"
-    }
 ]
