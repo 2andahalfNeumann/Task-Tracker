@@ -41,11 +41,18 @@ def task_add():
     print(f"Task added successfully (ID: {task_id})")
 
 
-#Update function
-def task_update():
+#Update desc
+def task_update_desc():
     # Load Tasks
     with open("tasks.json", "r") as f:
         tasks = json.load(f)
+    
+    print("-" * 30 + "\n")
+    print("\nAvailable Tasks:\n")
+    for task in tasks:
+        status_color = co.ORANGE if task['task_status'] == "in-progress" else co.GREEN
+        print(f"ID: {task['task_id']} | Task: {task['task_desc']} | Status: {status_color}{task['task_status']}{co.RESET} | Date created: {task['task_createdAt']} | Date Updated: {task['task_updatedAt']}")
+        print("-" * 30 + "\n")
     
     update_id = int(input("Enter task ID to update: "))
 
@@ -96,7 +103,7 @@ def task_delete():
         with open("tasks.json", "w") as f:
             json.dump(new_tasks, f, indent=4)
         
-        print(f"Successfully deleted task  {task['task_id']}")
+        print(f"Successfully deleted task  {delete_id}")
     
         """
         Currently added "errno" I stumbled across whilst testing.
@@ -128,7 +135,7 @@ def task_list():
     except Exception as e:
         print(f"An error occured: {e}")
 
-def task_update():
+def task_update_status():
     try:
     # Load Tasks
         with open("tasks.json", "r") as f:
