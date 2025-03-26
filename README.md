@@ -3,7 +3,7 @@
 A simple command-line task management application written in Python. This tool allows you to add tasks, update descriptions, change task status, delete tasks, and view a list of tasks with simple color-coded status output.
 
 All code was intended to follow:
-[text](https://roadmap.sh/projects/task-tracker)
+[The Roadmap.sh's task-tracker Project](https://roadmap.sh/projects/task-tracker)
 
 However, I sligtly differed as to making a cmd promt menu instead of pure cli.
 
