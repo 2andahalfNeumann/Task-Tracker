@@ -159,7 +159,7 @@ def task_list():
                     status_color = co.GREEN
                     print(f"ID: {task['task_id']} | Task: {task['task_desc']} | Status: {status_color}{task['task_status']}{co.RESET} | Date created: {task['task_createdAt']} | Date Updated: {task['task_updatedAt']}")
                     print("-" * 30 + "\n")
-            if task_list_choice == 4:
+            elif task_list_choice == 4:
                 print("Opting out")
                 break
             else:

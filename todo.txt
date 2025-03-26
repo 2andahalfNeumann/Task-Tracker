@@ -1,7 +1,3 @@
-**Implementing Features
-[X] Start by creating a basic CLI structure to handle user inputs.
-[/] Implement each feature one by one, ensuring to test thoroughly before moving to the next e.g. implement adding task functionality first, listing next, then updating, marking as in progress, etc.
-
 ** Testing and Debugging
 Test each feature individually to ensure they work as expected. Look at the JSON file to verify that the tasks are being stored correctly.
 Debug any issues that arise during development.
@@ -10,25 +6,3 @@ Debug any issues that arise during development.
 Ensure all features are implemented and tested.
 Clean up your code and add comments where necessary.
 Write a good readme file on how to use your Task Tracker CLI.
-
-
-
-
-
-The application should run from the command line, accept user actions and inputs as arguments, and store the tasks in a JSON file. The user should be able to:
-
-[X] Add, Update, and Delete tasks
-[X] Mark a task as in progress or done
-[X] List all tasks
-[X] List all tasks that are done
-[X] List all tasks that are in progress
-
-
-Here are some constraints to guide the implementation:
-You can use any programming language to build this project.
-Use positional arguments in command line to accept user inputs.
-Use a JSON file to store the tasks in the current directory.
-The JSON file should be created if it does not exist.
-Use the native file system module of your programming language to interact with the JSON file.
-Do not use any external libraries or frameworks to build this project.
-Ensure to handle errors and edge cases gracefully.
